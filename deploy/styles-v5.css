@@ -1,0 +1,157 @@
+/* Pass 05: author dossier and square, manual review strip. */
+.about {
+  display:grid;
+  grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);
+  gap:clamp(48px,8vw,148px);
+  align-items:start;
+  padding:clamp(96px,10vw,152px) 7vw;
+}
+.about-intro { max-width:540px; }
+.about .tag { margin:0 0 28px; }
+.about-name {
+  margin:0;
+  color:var(--wine);
+  font:clamp(52px,6.8vw,104px)/.84 var(--serif);
+  letter-spacing:-.055em;
+}
+.about h2 {
+  max-width:510px;
+  margin:38px 0 20px;
+  font-size:clamp(31px,3.05vw,50px);
+  line-height:.98;
+  letter-spacing:-.045em;
+}
+.about-description {
+  max-width:48ch;
+  margin:0;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.65;
+}
+.about-details { display:grid; gap:38px; padding-top:4px; }
+.about blockquote {
+  display:grid;
+  gap:26px;
+  margin:0;
+  padding:clamp(32px,4vw,56px);
+  color:var(--cream);
+  background:var(--wine);
+  font:clamp(27px,2.65vw,44px)/1.08 var(--serif);
+  letter-spacing:-.035em;
+}
+.about blockquote span {
+  color:#dcb781;
+  font:10px/1.2 var(--sans);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.about-credentials { border-top:1px solid var(--line); }
+.about-credentials-label {
+  margin:0;
+  padding:17px 0 19px;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+.about-credentials article {
+  display:grid;
+  grid-template-columns:44px minmax(0,1fr);
+  gap:18px;
+  padding:21px 0;
+  border-top:1px solid var(--line);
+}
+.about-credentials article > b {
+  color:#ae7c3c;
+  font:13px/1 var(--sans);
+}
+.about-credentials article p { margin:0; color:var(--muted); font-size:14px; line-height:1.55; }
+.about-credentials article strong { display:block; margin-bottom:4px; color:var(--ink); font-size:14px; }
+
+/* styles-v2 still carries `.about > div:last-child p{display:grid;grid-template-columns:115px 1fr}`.
+   It leaks into these rows: the label and every article <p> become a two-column grid, so long titles
+   overflow into the description and the label breaks into three lines. Scope it back to block. */
+.about p.about-credentials-label {
+  display:block;
+  padding:17px 0 19px;
+  border-top:0;
+  font-size:10px;
+  letter-spacing:.13em;
+  white-space:nowrap;
+}
+.about .about-credentials article p {
+  display:block;
+  margin:0;
+  padding:0;
+  border-top:0;
+  font-size:14px;
+  overflow-wrap:break-word;
+}
+.about .about-credentials article strong {
+  display:block;
+  margin-bottom:4px;
+  overflow-wrap:break-word;
+}
+
+/* Arrow glyph ↗ turns into a colour emoji on iOS. Draw it instead. */
+.aar {
+  display:inline-block;
+  width:.85em;
+  height:.85em;
+  margin-left:.28em;
+  vertical-align:-.06em;
+  flex:none;
+}
+
+/* The arch is drawn on the figure; on very wide screens the figure column grew
+   while the portrait height stayed fixed, so the gold arch stretched sideways.
+   Cap the figure at the width where the arch keeps its approved proportions. */
+@media (min-width:801px) {
+  /* The hairline between the copy and the portrait: v3 removed it with the arch,
+     the client wants both. */
+  .hero figure {
+    width:100%;
+    border-left:1px solid rgba(190,155,104,.22);
+  }
+  /* Narrower than the column: the photo bleeds past the arch, as in the reference. */
+  .hero figure::before,
+  .hero figure::after {
+    left:auto;
+    right:-4%;
+    width:min(95%, 520px);
+  }
+}
+
+/* «Вы можете всё понимать головой…» broke into 7 one-word lines in a .72fr column. */
+@media (min-width:801px) {
+  .logic > div { grid-template-columns:1.02fr .98fr; gap:8%; max-width:none; margin:0; }
+  .logic h2 {
+    max-width:560px;
+    font-size:clamp(34px,3.6vw,56px);
+    line-height:1.06;
+  }
+  .logic > div > p:first-of-type { margin-top:0; }
+}
+
+/* Square originals are deliberate: they read as unedited screenshots, not cards. */
+.review-thumb,
+.review-thumb img { border-radius:0; }
+.review-toolbar { max-width:none; margin:0 0 18px; }
+
+@media (max-width:800px) {
+  .about { grid-template-columns:1fr; gap:46px; padding:80px 20px; }
+  .about .tag { margin-bottom:24px; }
+  .about-name { font-size:clamp(50px,17vw,76px); }
+  .about h2 { margin-top:31px; font-size:clamp(32px,10vw,44px); }
+  .about-details { gap:28px; padding-top:0; }
+  .about blockquote { padding:30px 25px; font-size:30px; }
+  .about-credentials article { grid-template-columns:35px minmax(0,1fr); gap:12px; }
+
+  /* Длинное «психофункциональной» вылезало за колонку и давало горизонтальный скролл. */
+  .program article { grid-template-columns:65px minmax(0,1fr); }
+  .program h3 { min-width:0; overflow-wrap:break-word; }
+
+  .review-thumb,
+  .review-thumb img { border-radius:0; }
+}
