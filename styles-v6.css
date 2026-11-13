@@ -1,0 +1,33 @@
+/* Variant 6 — only linked from index-v6.html. The live page (index-v2.html)
+   does not load this file. Contents: content cap on wide screens and a
+   slightly wider lead. */
+
+/* --- Lead measure ------------------------------------------------------ */
+.hero p:not(.tag) { max-width: 620px; }
+
+/* --- Content cap: below 1601 nothing changes --------------------------- */
+@media (min-width: 1601px) {
+  :root {
+    --pad: max(7vw, calc((100vw - 1440px) / 2));
+  }
+
+  header,
+  .hero,
+  .intro,
+  .logic,
+  .science,
+  .program,
+  .about,
+  .entry,
+  .faq,
+  .final,
+  footer {
+    padding-left: var(--pad);
+    padding-right: var(--pad);
+  }
+
+  .reviews > .tag,
+  .reviews > h2 {
+    margin-left: var(--pad);
+  }
+}
