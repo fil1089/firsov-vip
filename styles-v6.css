@@ -23,8 +23,7 @@ header a { display:inline-flex; align-items:center; min-height:44px; }
 .button:active { transform:translateY(1px); }
 .hero { padding-top:80px; padding-bottom:55px; }
 .hero p:not(.tag) { line-height:1.55; }
-.hero .facts { flex-wrap:wrap; gap:24px; margin:24px 0; }
-.hero .facts small { margin-top:6px; font-size:12px; }
+.hero .button { margin-top:28px; }
 .hero > div,.method-heading,.method-copy,.logic-copy,.program article > div,
 .entry > div,.offer-copy,.offer-details { min-width:0; }
 .intro h2 { max-width:850px; }
@@ -72,6 +71,29 @@ header a { display:inline-flex; align-items:center; min-height:44px; }
 .faq summary { min-height:44px; padding:8px 30px 8px 0; line-height:1.4; }
 .faq details p { max-width:900px; font-size:17px; line-height:1.7; }
 .review-toolbar .review-nav,.review-dialog-close,.review-dialog-nav { width:44px; height:44px; }
+.review-thumbs { padding-top:10px; scroll-padding-inline:7vw; }
+
+/* --- Quiet hover motion: the symptom rows set the pace ------------------ */
+.program article,
+.entry li,
+.about-credentials article { transition:transform .25s; }
+.program article:hover,
+.entry li:hover,
+.about-credentials article:hover { transform:translateX(8px); }
+
+.methods article { transition:transform .25s,box-shadow .25s; }
+.methods article:hover { transform:translateY(-3px); box-shadow:0 16px 34px rgba(36,31,30,.12); }
+
+.faq summary { transition:color .2s; }
+.faq details:hover summary { color:var(--wine); }
+
+@media (prefers-reduced-motion:reduce) {
+  .symptoms article:hover,
+  .program article:hover,
+  .entry li:hover,
+  .about-credentials article:hover,
+  .methods article:hover { transform:none; }
+}
 
 .offer {
   display:grid;
@@ -114,6 +136,7 @@ header a { display:inline-flex; align-items:center; min-height:44px; }
 }
 @media (max-width:800px) {
   .hero { padding:55px 20px 0; }
+  .review-thumbs { scroll-padding-inline:20px; }
   .hero h1 { font-size:clamp(43px,12.6vw,58px); }
   .hero p:not(.tag) { font-size:16px; }
   .hero .facts { gap:22px; }
